@@ -99,7 +99,14 @@ form.addEventListener('submit', function(e) {
 
     if(!isFeedback) {
         head.textContent = item;
+        inputForm.value = '';
     }
+
+    editButton.addEventListener('click', function() {
+        head.textContent = '';
+        inputForm.value = item;
+        console.log('check item: ' + item)
+    })
     
 })
 
@@ -114,6 +121,14 @@ completeButton.addEventListener('click', function() {
 })
 
 // edit item button
+/*
+editButton.addEventListener('click', function() {
+        head.textContent = '';
+        inputForm.value = item;
+        console.log('check item: ' + item)
+    })
+
+*/
 
 // delete item button
 
