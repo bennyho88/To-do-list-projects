@@ -57,8 +57,6 @@ deleteIcon.classList.add('far', 'fa-times-circle');
 
 const validateInput = function (item) {
 
-
-
     let isFeedback = false;
     const feedback = document.querySelector('.feedback');
     feedback.innerHTML = ''
@@ -78,32 +76,40 @@ form.addEventListener('submit', function (e) {
 
     e.preventDefault();
 
-    itemList.appendChild(itemDiv);
-    itemDiv.appendChild(head);
-    itemDiv.appendChild(itemIconsDiv);
+    /*
+    const itemValue = document.querySelector('#itemInput').value;
+    console.log('check value item: ' + itemValue);
+    console.log('check typeof itemvalue: ' + typeof itemValue);
+*/
+   //  addItem(itemValue);
+   addItem(head.value);
 
+   head.value = '';
+  
+/*
 
-    itemIconsDiv.appendChild(completeItem);
-    itemIconsDiv.appendChild(editItem);
-    itemIconsDiv.appendChild(deleteItem);
-
-    completeItem.appendChild(completeIcon);
-    editItem.appendChild(editIcon);
-    deleteItem.appendChild(deleteIcon);
-
-
-    const item = document.querySelector('#itemInput').value;
-    console.log('check value item: ' + item);
-
-
-    let isFeedback = validateInput(item);
+    let isFeedback = validateInput(itemValue);
     console.log('check isFeedback: ' + isFeedback);
 
-    if (!isFeedback) {
-        head.textContent = item;
-        inputForm.value = '';
-    }
-
+    if (typeof(Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+        if (!isFeedback) {
+          
+            inputForm.value = '';
+            localStorage.setItem('item', itemValue)
+            console.log('it works');
+            console.log('check localstorage: ' + localStorage.getItem('item') );
+            let value  = localStorage.getItem('item');
+             head.textContent = value;
+            // head.innerHTML = localStorage.getItem('item');
+        }
+    
+      } else {
+        // Sorry! No Web Storage support..
+        console.log('it doesnt work')
+      }
+    
+*/
     // complete item button
 
     const completeButton = document.querySelector('.complete-item');
@@ -118,14 +124,16 @@ form.addEventListener('submit', function (e) {
 
     editButton.addEventListener('click', function () {
         head.textContent = '';
-        inputForm.value = item;
-        console.log('check item: ' + item)
+        inputForm.value = itemValue;
+        console.log('check item edit: ' + itemValue)
         itemDiv.textContent = '';
     })
 
     deleteButton.addEventListener('click', function() {
         itemDiv.textContent = '';
     })
+
+   
 
 })
 
@@ -142,3 +150,35 @@ editButton.addEventListener('click', function() {
 
 
 // clear items - button
+
+// localStorage.clear();
+// store items in localstorage
+
+
+
+// add item 
+
+function addItem() {
+
+    const item = document.querySelector('#itemInput').value;
+
+    // item div append to itemlist
+    itemList.appendChild(itemDiv);
+    // head 5 append to item div
+    itemDiv.appendChild(head);
+    // item icon div append to item div
+    itemDiv.appendChild(itemIconsDiv);
+
+
+    itemIconsDiv.appendChild(completeItem);
+    itemIconsDiv.appendChild(editItem);
+    itemIconsDiv.appendChild(deleteItem);
+
+    completeItem.appendChild(completeIcon);
+    editItem.appendChild(editIcon);
+    deleteItem.appendChild(deleteIcon);
+    console.log(itemDiv)
+
+    head.textContent = item;
+}
+
