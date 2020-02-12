@@ -6,6 +6,8 @@ const itemList = document.querySelector('.item-list');
 
 const clearButton = document.querySelector('#clear-list');
 
+
+
 ////add list in html
 
 /*
@@ -19,7 +21,6 @@ const clearButton = document.querySelector('#clear-list');
 </div>
 </div> -->
 */
-
 
 const itemDiv = document.createElement('div');
 const head = document.createElement('h5');
@@ -95,7 +96,25 @@ form.addEventListener('submit', function(e) {
     
     let isFeedback = validateInput(item);
     console.log('check isFeedback: ' + isFeedback);
+
+    if(!isFeedback) {
+        head.textContent = item;
+    }
     
 })
+
+const completeButton = document.querySelector('.complete-item');
+const editButton = document.querySelector('.edit-item');
+const deleteButton = document.querySelector('.delete-item');
+
+// complete item button
+
+completeButton.addEventListener('click', function() {
+    head.classList.toggle('completed');
+})
+
+// edit item button
+
+// delete item button
 
 // clear items - button
