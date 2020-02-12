@@ -53,71 +53,80 @@ deleteIcon.classList.add('far', 'fa-times-circle');
 
 // append elements to item list
 
-itemList.appendChild(itemDiv);
-itemDiv.appendChild(head);
-itemDiv.appendChild(itemIconsDiv);
-
-
-itemIconsDiv.appendChild(completeItem);
-itemIconsDiv.appendChild(editItem);
-itemIconsDiv.appendChild(deleteItem);
-
-completeItem.appendChild(completeIcon);
-editItem.appendChild(editIcon);
-deleteItem.appendChild(deleteIcon);
-
 // validateinput
 
-const validateInput = function(item) {
+const validateInput = function (item) {
+
+
 
     let isFeedback = false;
     const feedback = document.querySelector('.feedback');
     feedback.innerHTML = ''
 
-    if(item === "") {
+    if (item === "") {
         feedback.classList.add('showItem', 'alert-danger');
         feedback.innerHTML += 'Please Enter Valid Value';
         isFeedback = true;
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
         feedback.classList.remove('showItem', 'alert-danger');
-    },5000)
+    }, 5000)
 }
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', function (e) {
 
     e.preventDefault();
-    
+
+    itemList.appendChild(itemDiv);
+    itemDiv.appendChild(head);
+    itemDiv.appendChild(itemIconsDiv);
+
+
+    itemIconsDiv.appendChild(completeItem);
+    itemIconsDiv.appendChild(editItem);
+    itemIconsDiv.appendChild(deleteItem);
+
+    completeItem.appendChild(completeIcon);
+    editItem.appendChild(editIcon);
+    deleteItem.appendChild(deleteIcon);
+
 
     const item = document.querySelector('#itemInput').value;
     console.log('check value item: ' + item);
 
-    
+
     let isFeedback = validateInput(item);
     console.log('check isFeedback: ' + isFeedback);
 
-    if(!isFeedback) {
+    if (!isFeedback) {
         head.textContent = item;
         inputForm.value = '';
     }
 
-    editButton.addEventListener('click', function() {
+    // complete item button
+
+    const completeButton = document.querySelector('.complete-item');
+    const editButton = document.querySelector('.edit-item');
+    const deleteButton = document.querySelector('.delete-item');
+
+    completeButton.addEventListener('click', function () {
+        head.classList.toggle('completed');
+    })
+
+    // edit item button
+
+    editButton.addEventListener('click', function () {
         head.textContent = '';
         inputForm.value = item;
         console.log('check item: ' + item)
+        itemDiv.textContent = '';
     })
-    
-})
 
-const completeButton = document.querySelector('.complete-item');
-const editButton = document.querySelector('.edit-item');
-const deleteButton = document.querySelector('.delete-item');
+    deleteButton.addEventListener('click', function() {
+        itemDiv.textContent = '';
+    })
 
-// complete item button
-
-completeButton.addEventListener('click', function() {
-    head.classList.toggle('completed');
 })
 
 // edit item button
@@ -130,6 +139,6 @@ editButton.addEventListener('click', function() {
 
 */
 
-// delete item button
+
 
 // clear items - button
